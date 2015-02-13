@@ -19,17 +19,13 @@ ifeq ($(TARGET_BUILD_APPS),)
 
 LOCAL_PATH := $(call my-dir)
 
-local_cflags_for_slang := -Wno-sign-promo -Wall -Wno-unused-parameter -Werror
+local_cflags_for_slang := -Wno-sign-promo -Wall -Wno-unused-parameter -Wno-return-type -Werror
 ifeq ($(TARGET_BUILD_VARIANT),eng)
 local_cflags_for_slang += -O0
 else
 local_cflags_for_slang += -D__DISABLE_ASSERTS
 endif
 local_cflags_for_slang += -DTARGET_BUILD_VARIANT=$(TARGET_BUILD_VARIANT)
-
-ifeq ($(mac_sdk_version),10.9)
-local_cflags_for_slang += -Wno-nested-anon-types -Wno-unused-private-field
-endif
 
 ifeq "REL" "$(PLATFORM_VERSION_CODENAME)"
   RS_VERSION := $(PLATFORM_SDK_VERSION)
